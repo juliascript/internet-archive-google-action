@@ -1,10 +1,5 @@
 module.exports = {
-  fallback: {
-    whatWasThat: 'Sorry, what was that?',
-    didntCatchThat: "I didn't catch that",
-    misunderstand: "I'm having trouble understanding you",
-    finalReprompt: "I'm sorry I'm having trouble here. Maybe we should try this again later."
-  },
+  appExit: "Okay, let's try this again later.",
   errors: {
     device: {
       mediaResponse: "Sorry, your device doesn't support media response."
@@ -18,6 +13,22 @@ module.exports = {
       reprompt: "I still didn't get that."
     }
   },
+  fallback: {
+    whatWasThat: 'Sorry, what was that?',
+    didntCatchThat: "I didn't catch that",
+    misunderstand: "I'm having trouble understanding you",
+    finalReprompt: "I'm sorry I'm having trouble here. Maybe we should try this again later."
+  },
+  prompts: {
+    select: {
+      artist: "What artist do you want to hear?",
+      city: "Please select a city",
+      year: "Please select a year",
+      yearAndCity: "Please select a city and year",
+      collection: "Please select a collection",
+      topic: "Please select a topic"
+    }
+  },
   suggestion: {
     artist: {
       gratefulDead: 'Grateful Dead',
@@ -26,7 +37,8 @@ module.exports = {
       discoBiscuits: 'Disco Biscuits',
       hotButteredRum: 'Hot Buttered Rum',
       kellerWilliams: 'Keller Williams'
-    }
-  },
-  appExit: "Okay, let's try this again later."
+    }, 
+    artistsPrompt: "I have some music from The Ditty Bops, Cowboy Junkies, and Grateful Dead, for example"
+  }
+  
 };

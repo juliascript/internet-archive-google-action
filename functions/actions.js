@@ -29,6 +29,10 @@ module.exports = {
   },
   information: {
     availableYears: 'SongAvailableYears'
+  },
+  amazon: {
+    nextIntent: "AMAZON.NextIntent",
+    previousIntent: "AMAZON.PreviousIntent"
   }
 
 };

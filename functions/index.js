@@ -403,22 +403,22 @@ function responseHandler (app) {
       ];
 
       if (collection === '') {
-        repromptText = "<speak>Please select artist name. Like The Ditty Bops,<break time='.5s'/> Or Cowboy Junkies,<break time='.5s'/> Or Grateful Dead.</speak>";
-        speechOutput = "<speak>Please select artist name. Like The Ditty Bops,<break time='.5s'/> Or Cowboy Junkies,<break time='.5s'/> Or Grateful Dead.</speak>";
+        repromptText = "<speak>" + strings.prompts.select.artist + strings.suggestion.artistsPrompt + "</speak>";
+        speechOutput = "<speak>" + strings.prompts.select.artist + strings.suggestion.artistsPrompt + "</speak>";
         askWithReprompt(app, speechOutput, repromptText, suggestions);
       } else if (city === '') {
-        repromptText = '<speak>Please select city first.</speak>';
-        speechOutput = '<speak>Please select city first.</speak>';
+        repromptText = "<speak>" + strings.prompts.select.city + "</speak>";
+        speechOutput = "<speak>" + strings.prompts.select.city + "</speak>";
         askWithReprompt(app, speechOutput, repromptText, suggestions);
       } else if (YearList.length > 0) {
         if (YearList.length === 1) {
-          repromptText = '<speak>Available year for ' + city + ' is ' + YearList + ', please select a year.</speak>';
-          speechOutput = '<speak>Available year for ' + city + ' is ' + YearList + ', please select a year.</speak>';
+          repromptText = '<speak>Available year for ' + city + ' is ' + YearList + strings.prompts.select.year + '</speak>';
+          speechOutput = '<speak>Available year for ' + city + ' is ' + YearList + strings.prompts.select.year + '</speak>';
           askWithReprompt(app, speechOutput, repromptText, suggestions);
         }
         if (YearList.length > 1) {
-          repromptText = '<speak>Available years for ' + city + ' are ' + YearList + ', please select a year.</speak>';
-          speechOutput = '<speak>Available years for ' + city + ' are ' + YearList + ', please select a year.</speak>';
+          repromptText = '<speak>Available years for ' + city + ' are ' + YearList + strings.prompts.select.year + '</speak>';
+          speechOutput = '<speak>Available years for ' + city + ' are ' + YearList + strings.prompts.select.year + '</speak>';
           askWithReprompt(app, speechOutput, repromptText, suggestions);
         }
       }
@@ -427,12 +427,12 @@ function responseHandler (app) {
       let repromptText = '';
       let speechOutput = '';
       if (MusicUrlList.length >= 1) {
-        repromptText = '<speak>You are listening ' + MusicUrlList[counter]['title'] + ', ' + MusicUrlList[counter]['coverage'] + ', ' + MusicUrlList[counter]['year'] + '.</speak>';
-        speechOutput = '<speak>You are listening ' + MusicUrlList[counter]['title'] + ', ' + MusicUrlList[counter]['coverage'] + ', ' + MusicUrlList[counter]['year'] + '.</speak>';
+        repromptText = '<speak>You are listening to ' + MusicUrlList[counter]['title'] + ', ' + MusicUrlList[counter]['coverage'] + ', ' + MusicUrlList[counter]['year'] + '.</speak>';
+        speechOutput = '<speak>You are listening to ' + MusicUrlList[counter]['title'] + ', ' + MusicUrlList[counter]['coverage'] + ', ' + MusicUrlList[counter]['year'] + '.</speak>';
         askWithReprompt(app, speechOutput, repromptText, suggestions);
       } else {
-        repromptText = '<speak>No song id Playing now. Please select collection first.</speak>';
-        speechOutput = '<speak>No song id Playing now. Please select collection first.</speak>';
+        repromptText = '<speak>' + strings.prompts.select.collection + '</speak>';
+        speechOutput = '<speak>' + strings.prompts.select.collection + '</speak>';
         askWithReprompt(app, speechOutput, repromptText, suggestions);
       }
     } else if ((app.getIntent() === MEDIA_STATUS_INTENT) && (app.getArgument('MEDIA_STATUS').extension.status === app.Media.Status.FINISHED)) {
@@ -464,7 +464,7 @@ function responseHandler (app) {
           play(app, 0);
         }
       }
-    } else if ((app.getIntent() === 'AMAZON.NextIntent')) {
+    } else if ((app.getIntent() === actions.amazon.nextIntent)) {
       if (currentSpeechoutput !== null) {
         repeatInput(app);
       } else if (SeventyEights === true) {
@@ -472,8 +472,8 @@ function responseHandler (app) {
         let repromptText = '';
         let speechOutput = '';
         if (TotalTrack < 0) {
-          repromptText = '<speak>Please Select Topic first</speak>';
-          speechOutput = '<speak>Please Select Topic first</speak>';
+          repromptText = '<speak>' + strings.prompts.select.topic + '</speak>';
+          speechOutput = '<speak>' + strings.prompts.select.topic + '</speak>';
           askWithReprompt(app, speechOutput, repromptText, suggestions);
         } else {
           counter++;
@@ -491,8 +491,8 @@ function responseHandler (app) {
         let repromptText = '';
         let speechOutput = '';
         if (TotalTrack === 0) {
-          repromptText = '<speak>Please Select City and year first</speak>';
-          speechOutput = '<speak>Please Select City and year first</speak>';
+          repromptText = '<speak>' + strings.prompts.select.yearAndCity + '</speak>';
+          speechOutput = '<speak>' + strings.prompts.select.yearAndCity + '</speak>';
           askWithReprompt(app, speechOutput, repromptText, suggestions);
         } else {
           counter++;
@@ -509,7 +509,7 @@ function responseHandler (app) {
           }
         }
       }
-    } else if (app.getIntent() === 'AMAZON.PreviousIntent') {
+    } else if (app.getIntent() === actions.amazon.previousIntent) {
       if (previousSpeechoutput === -1) {
         repeatInput(app);
       } else if (previousSpeechoutput !== null) {
@@ -606,8 +606,8 @@ function getCollection (app) {
             }
           }
           cardTitle = 'Provide City and Year';
-          repromptText = "<speak>Please select a City and year.<break time='.5s'/> Like " + CityName + ' ' + YearName + "  or <break time='.1s'/>random.</speak>";
-          cardOutput = collectionRealName + ' has been selected. Now, please select CITY and YEAR or RANDOM. Like ' + CityName + ' ' + YearName + ' or random.';
+          repromptText = "<speak>" + strings.prompts.select.yearAndCity + "Like " + CityName + ' ' + YearName + "  or random.</speak>";
+          cardOutput = collectionRealName + ' has been selected. Now, ' + strings.prompts.select.yearAndCity + ' Like ' + CityName + ' ' + YearName;
 
           //          speechOutput = "<speak>" + collection_real_name + " has been selected.<break time='.5s'/> Now Please select City and Year or <break time='.1s'/>random. <break time='.5s'/>Like " + //CityName + " " + YearName + " or <break time='.1s'/> random.</speak>";
           speechOutput = '<speak>' + collectionRealName + ' - great choice! Do you have a specific city and year in mind, like ' + CityName + ' ' + YearName + ', or would you like me to play something randomly from ' + collectionRealName + '?</speak>';
